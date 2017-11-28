@@ -52,4 +52,10 @@ class GreetingController {
     void echoConvertAndSend(@RequestParam("msg") String message) {
         socketService.echoMessage(message);
     }
+    
+    @RequestMapping(value = "/echoTest")
+    public String echoTest(@RequestParam("msg") String message) {
+    	socketService.echoMessage(message);
+    	return new String(message.trim());
+    }
 }

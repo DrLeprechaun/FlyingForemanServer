@@ -6,6 +6,7 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocket; //+
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 
 @Configuration
 @EnableWebSocket //+
@@ -15,7 +16,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         //config.enableSimpleBroker("/topic"); //-
-        config.enableSimpleBroker("/topic", "/queue", "/exchange"); //+
+        config.enableSimpleBroker("/topic", "/queue", "/exchange");//+
+        config.setApplicationDestinationPrefixes("/topic", "/queue");//+
         config.setApplicationDestinationPrefixes("/app");
     }
 
@@ -24,5 +26,10 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         //registry.addEndpoint("/gs-guide-websocket").withSockJS(); //-
     	registry.addEndpoint("/example-endpoint").withSockJS(); //+
     }
+    
+    @Override
+	public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
+        registration.setMessageSizeLimit(8 * 1024);
+}
 
 }
