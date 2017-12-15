@@ -1,0 +1,9 @@
+{
+"/api": {
+"target": "http://localhost:8080/webTest",
+"secure": false,
+"pathRewrite": {
+      "^/api": ""
+    }
+}
+}

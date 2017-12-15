@@ -1,6 +1,8 @@
 package com.gakeko.ffserver.controllers;
 
 import java.util.concurrent.atomic.AtomicLong;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,23 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 //import ua.naiksoftware.example_server.model.EchoModel;
 //import ua.naiksoftware.example_server.service.SocketService;
 import com.gakeko.ffserver.model.EchoModel;
+import com.gakeko.ffserver.model.ResponseModel;
 import com.gakeko.ffserver.service.SocketService;
 
-/*@RestController
-public class GreetingController {
-	
-	private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-
-    @RequestMapping("/greeting")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
-    }
-
-}*/ //-
-
-@RestController //+
+@RestController
 class GreetingController {
 
 
@@ -57,5 +46,12 @@ class GreetingController {
     public String echoTest(@RequestParam("msg") String message) {
     	socketService.echoMessage(message);
     	return new String(message.trim());
+    }
+    
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/webTest")
+    public ResponseModel webTest() {
+    	socketService.echoMessage("command1");
+    	return new ResponseModel("SUCCESS", "Command submitted");
     }
 }
