@@ -20,9 +20,9 @@ export class DroneControlComponent implements OnInit {
       this.data = {title: "", content: ""}
   }
 
-  private getMyBlog() {
-    /*return this._http.get('http://localhost:8080/webTest', {headers: this.getHeaders()})*/
-    return this._http.get('http://178.63.57.162:8080/webTest', {headers: this.getHeaders()})
+  private executeCommand(cmd) {
+    //return this._http.get('http://178.63.57.162:8080/executeCommand?cmd=' + cmd, {headers: this.getHeaders()})
+    return this._http.get('http://localhost:8080/executeCommand?cmd=' + cmd, {headers: this.getHeaders()})
                 .map((res: Response) => res.json())
                  .subscribe(data => {
                         this.data = data;

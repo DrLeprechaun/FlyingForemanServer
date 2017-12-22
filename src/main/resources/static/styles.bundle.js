@@ -35,7 +35,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n\nh2 { color: #444; font-weight: lighter; }\nbody { margin: 2em; }\nbody, input[text], button { color: #888; font-family: Cambria, Georgia; }\nbutton { padding: 0.2em; font-size: 14px}\n* { font-family: Arial; }\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n\nh2 { color: #444; font-weight: lighter; }\nbody { margin: 2em; }\nbody, input[text], button { color: #888; font-family: Cambria, Georgia; }\nbutton { padding: 0.2em; font-size: 14px}\n* { font-family: Arial; }\n\n/* The container <div> - needed to position the dropdown content */\n.dropdown {\n   position: relative;\n   display: inline-block;\n   padding: 0.25rem 0.5rem;\n   font-size: 0.875rem;\n   line-height: 1.5;\n   border-radius: 0.2rem;\n   font-family: Arial;\n}\n\n/* Dropdown Content (Hidden by Default) */\n.dropdown-content {\n   display: none;\n   position: absolute;\n   background-color: #f9f9f9;\n   min-width: 160px;\n   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);\n   z-index: 1;\n}\n\n/* Links inside the dropdown */\n.dropdown-content a {\n   color: black;\n   padding: 12px 16px;\n   text-decoration: none;\n   display: block;\n}\n\n/* Change color of dropdown links on hover */\n.dropdown-content a:hover {background-color: #f1f1f1}\n\n/* Show the dropdown menu on hover */\n.dropdown:hover .dropdown-content {\n   display: block;\n}\n\n/* Change the background color of the dropdown button when the dropdown content is shown */\n.dropdown:hover .dropbtn {\n   background-color: #3e8e41;\n}\n", ""]);
 
 // exports
 

@@ -1,5 +1,36 @@
-<h3>Управление квадрокоптером</h3>
-<button type="button" (click)=getMyBlog() class="btn btn-primary">Кнопка</button>
+<!--<a class="btn btn-primary" href="/main-page" role="button">Главная</a>
+<div class="dropdown">
+ <a class="btn btn-primary" href="#" role="button">Личный кабинет</a>
+ <div class="dropdown-content">
+   <a href="#">Управление</a>
+   <a href="/private-office/drone-route">Маршрут</a>
+   <a href="/private-office/measurements">Измерения</a>
+ </div>
+</div>
+<a class="btn btn-primary" href="/email-report" role="button">Отчёт</a>-->
+<h3 id="componentHeader">Управление квадрокоптером</h3>
+<div id="cameraWindow">
+</div>
+<div id="controlPanel">
+  <table>
+    <tr>
+      <td>
+    <button id="upButton" type="button" (click)=executeCommand(2) class="btn btn-primary">&#x025B3;<br/>вверх</button><br/>
+    <!--<button id="upButton" type="button" ng-click="executeCommand('up')" class="btn-lg btn-primary">&#x025B3;</button><br/>-->
+    <button id="downButton" type="button" (click)=executeCommand(3) class="btn btn-primary">&#x025BD;<br/>вниз</button>
+  </td>
+  <td>
+    <button id="leftButton" type="button" (click)=executeCommand(4) class="btn-lg btn-primary"><img src="/assets/img/arrow-left.png"/><br/>вправо</button>
+    <button id="forwardButton" type="button" (click)=executeCommand(5) class="btn-lg btn-primary"><img src="/assets/img/arrow-up.png"/><br/>вперёд</button>
+    <button id="rightButton" type="button" (click)=executeCommand(6) class="btn-lg btn-primary"><img src="/assets/img/arrow-right.png"/><br/>влево</button>
+  </td>
+</tr>
+</table>
+  <div style="margin-top: 20px">
+    <button id="stopButton" type="button" (click)=executeCommand(0) class="btn-lg btn-success ">Стоп </button>
+    <button id="startButton" type="button" (click)=executeCommand(1) class="btn-lg btn-danger ">Старт</button>
+  </div>
+</div>
 <div class="ffLogWindow" ng-style="{ color: getLogColor() }">
 <p innerHTML="{{data.title}}"></p>
 <p innerHTML="{{data.content}}"></p>
