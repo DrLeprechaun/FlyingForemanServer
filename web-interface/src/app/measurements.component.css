@@ -3,10 +3,11 @@
 }
 
 .canvas {
-  width: 400px;
-  height: 300px;
+  width: 500px;
+  height: 400px;
   overflow-y: scroll;
   overflow-x: scroll;
+  cursor: crosshair;
   /*display: inline-block;*/
 }
 

@@ -16,7 +16,6 @@ export class DroneControlComponent implements OnInit {
   constructor(
     private _http: Http,
     private router: Router) {
-      //this.getMyBlog();
       this.data = {title: "", content: ""}
   }
 

@@ -10,11 +10,40 @@
 <a class="btn btn-primary" href="/email-report" role="button">Отчёт</a>-->
 <h3 id="componentHeader">Измерения</h3>
 <div class="workbench">
-  <div class="canvas">
+  <div id="canvas" class="canvas" (click)=canvasClick($event)>
     <img src="/assets/content/building.jpg">
   </div>
   <div class="tools">
-    Длина отрезка:
-    <input class="form-control" type="text" placeholder="{{lineLength}}" readonly>
+    <p>{{instructionMessage}}</p>
+    <table>
+      <tr>
+        <td>
+          Длина отрезка (пкс):
+          <input class="form-control" type="text" placeholder="{{lineLength}}" readonly>
+        </td>
+        <td>
+          Расстояние (м):
+          <input class="form-control" type="text" placeholder="{{goalDistance}}" readonly>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Расстояние между вешками (м):
+          <input id="poleDistanceInput" class="form-control" placeholder="0" [(ngModel)] = "poleDistance">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Фокусное расстояние (м):
+          <input id="focusDistanceInput" class="form-control" placeholder="0" [(ngModel)] = "focusDistance">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Разрешение (пкс/дюйм):
+          <input id="photoResolutionInput" class="form-control" placeholder="0" [(ngModel)] = "photoResolution">
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
