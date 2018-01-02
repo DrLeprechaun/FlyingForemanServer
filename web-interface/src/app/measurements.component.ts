@@ -8,10 +8,14 @@ import { Router } from '@angular/router';
 })
 export class MeasurementsComponent implements OnInit {
 
+  private  lineLength: number;
+
   constructor(
     private router: Router) {
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.lineLength = 0;
+  }
 
 }

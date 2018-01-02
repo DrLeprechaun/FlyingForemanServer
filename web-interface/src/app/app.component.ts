@@ -13,16 +13,20 @@ import { Component } from '@angular/core';
       <a routerLink="/private-office/measurements" routerLinkActive="active">Измерения</a>
       <a routerLink="/email-report" routerLinkActive="active">Отчёт</a>
     </nav>*/
-    `<a class="btn btn-primary" routerLink="/main-page" routerLinkActive="active" role="button">Главная</a>
+    `<nav class="nav">
+    <div>
+    <a routerLink="/main-page" routerLinkActive="active" role="button">Главная</a>
+    </div>
     <div class="dropdown">
-     <a class="btn btn-primary" routerLink="/private-office" routerLinkActive="active" role="button">Личный кабинет</a>
+     <a routerLink="/private-office" routerLinkActive="active" role="button">Личный кабинет</a>
      <div class="dropdown-content">
-       <a routerLink="/private-office/drone-control" routerLinkActive="active">Управление</a>
-       <a routerLink="/private-office/drone-route" routerLinkActive="active">Маршрут</a>
-       <a routerLink="/private-office/measurements" routerLinkActive="active">Измерения</a>
+       <a class="sublink" routerLink="/private-office/drone-control" routerLinkActive="active">Управление</a>
+       <a class="sublink" routerLink="/private-office/drone-route" routerLinkActive="active">Маршрут</a>
+       <a class="sublink" routerLink="/private-office/measurements" routerLinkActive="active">Измерения</a>
      </div>
     </div>
-    <a class="btn btn-primary" routerLink="/email-report" routerLinkActive="active" role="button">Отчёт</a>
+    <a routerLink="/email-report" routerLinkActive="active" role="button">Отчёт</a>
+      </nav>
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.css']
