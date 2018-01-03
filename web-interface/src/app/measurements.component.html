@@ -11,28 +11,32 @@
 <h3 id="componentHeader">Измерения</h3>
 <div class="workbench">
   <div id="canvas" class="canvas" (click)=canvasClick($event)>
-    <img src="/assets/content/building.jpg">
+    <img id="canvasImg" src="/assets/content/IMG_2968.jpg">
   </div>
   <div class="tools">
-    <p>{{instructionMessage}}</p>
+    <p><b>{{instructionMessage}}</b></p>
     <table>
       <tr>
         <td>
           Длина отрезка (пкс):
-          <input class="form-control" type="text" placeholder="{{lineLength}}" readonly>
+          <input class="form-control" type="text"  [(ngModel)] = "lineLength" readonly>
         </td>
-        <td>
-          Расстояние (м):
-          <input class="form-control" type="text" placeholder="{{goalDistance}}" readonly>
-        </td>
-      </tr>
-      <tr>
-        <td>
+        <td style="padding-left: 40px;">
           Расстояние между вешками (м):
-          <input id="poleDistanceInput" class="form-control" placeholder="0" [(ngModel)] = "poleDistance">
+          <input id="poleDistanceInput" type="number" class="form-control" placeholder="0" [(ngModel)] = "poleDistance">
         </td>
       </tr>
       <tr>
+        <td>
+          Длина отрезка (м):
+          <input class="form-control" type="text"  [(ngModel)] = "lineLengthMeter" readonly>
+        </td>
+        <td style="padding-left: 40px;">
+          Расстояние до вешек (м):
+          <input class="form-control" type="text"  [(ngModel)] = "goalDistance" readonly>
+        </td>
+      </tr>
+      <!--<tr>
         <td>
           Фокусное расстояние (м):
           <input id="focusDistanceInput" class="form-control" placeholder="0" [(ngModel)] = "focusDistance">
@@ -42,6 +46,26 @@
         <td>
           Разрешение (пкс/дюйм):
           <input id="photoResolutionInput" class="form-control" placeholder="0" [(ngModel)] = "photoResolution">
+        </td>
+      </tr>-->
+    </table>
+    ___________________________<br/>
+    <p>Информация о фотографии:</p>
+    <table>
+      <tr>
+        <td>
+          Фокусное расстояние (м):
+          <input class="form-control" type="text" [(ngModel)] = "focalLength" readonly>
+        </td>
+        <td style="padding-left: 40px;">
+          Разрешение (пкс/дюйм):
+          <input class="form-control" type="text" [(ngModel)] = "photoResolution" readonly>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Дата съёмки:
+          <input class="form-control" type="text" [(ngModel)] = "photoDateTime" readonly>
         </td>
       </tr>
     </table>
