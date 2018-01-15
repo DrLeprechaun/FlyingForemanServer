@@ -8,7 +8,8 @@
   overflow-y: scroll;
   overflow-x: scroll;
   cursor: crosshair;
-  /*display: inline-block;*/
+  position: relative;
+  top: 0;
 }
 
 .tools {
@@ -18,4 +19,29 @@
 
 .workbench input {
   width: 200px;
+}
+
+#canvasImg {
+  opacity: 0.5;
+}
+
+.parent {
+  position: relative;
+  top: 0;
+}
+.canvasImgLeft {
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+.canvasImgRight {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0.5;
+}
+
+.opacityTable {
+  margin-top: 20px;
 }

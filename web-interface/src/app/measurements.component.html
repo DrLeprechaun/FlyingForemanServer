@@ -11,8 +11,27 @@
 <h3 id="componentHeader">Измерения</h3>
 <div class="workbench">
   <div id="canvas" class="canvas" (click)=canvasClick($event)>
-    <img id="canvasImg" src="/assets/content/IMG_2968.jpg">
+    <img id="canvasImgLeft" class="canvasImgLeft" src="/assets/content/IMG_3106.jpg">
+    <img id="canvasImgRight" class="canvasImgRight" src="/assets/content/IMG_3107.jpg">
   </div>
+  <table class="opacityTable">
+    <tr>
+      <td>
+        Прозрачность левой<br/>фотографии (%):
+      </td>
+      <td>
+        Прозрачность правой<br/>фотографии (%):
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="number" [(ngModel)]="leftImageOpacity" min="0" max="100" (change)=leftOpacityChange()>
+      </td>
+      <td>
+        <input type="number" [(ngModel)]="rightImageOpacity" min="0" max="100" (change)=rightOpacityChange()>
+      </td>
+    </tr>
+  </table>
   <div class="tools">
     <p><b>{{instructionMessage}}</b></p>
     <table>

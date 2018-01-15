@@ -24,6 +24,8 @@ export class MeasurementsComponent implements OnInit {
   private photoResolution: number;
   private goalDistance: number;
   private photoDateTime: string;
+  private leftImageOpacity: number;
+  private rightImageOpacity: number;
 
   constructor(
     private router: Router) {
@@ -39,12 +41,14 @@ export class MeasurementsComponent implements OnInit {
     this.point2Y = 0;
     this.clickFlag = false;
     this.instructionMessage = "Выберите первую точку";
-    this.poleDistance = 0;
+    this.poleDistance = 1;
     this.lineLengthMeter = 0;
     this.focalLength = 0;
     this.photoResolution = 0;
     this.goalDistance = 0;
     this.photoDateTime = "";
+    this.leftImageOpacity = 50;
+    this.rightImageOpacity = 50;
   }
 
   private canvasClick(event: MouseEvent): void {
@@ -58,10 +62,12 @@ export class MeasurementsComponent implements OnInit {
     //this.focusDistance = document.getElementById("focusDistanceInput").value;
     //this.photoResolution = document.getElementById("photoResolutionInput").value;
 
-    var canvasImg = document.getElementById("canvasImg");
+    var canvasImg = document.getElementById("canvasImgRight");
     var photoDateTime_exif;
     var focalLength_exif;
     var resolution_exif;
+    var realSize;
+    var k;
     EXIF.getData(canvasImg, function() {
       var allMetaData = EXIF.getAllTags(this);
       //var allMetaDataSpan = document.getElementById("allMetaDataSpan");
@@ -80,16 +86,19 @@ export class MeasurementsComponent implements OnInit {
     if (this.clickFlag) {
       this.clickFlag = false;
       this.instructionMessage = "Выберите первую точку";
-      //this.point2X = event.clientX;
-      //this.point2Y = event.clientY;
 
-      this.point2X = event.offsetX?(event.offsetX):event.pageX-document.getElementById("canvasImg").offsetLeft;
-	    this.point2Y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("canvasImg").offsetTop;
+      this.point2X = event.offsetX?(event.offsetX):event.pageX-document.getElementById("canvasImgRight").offsetLeft;
+	    this.point2Y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("canvasImgRight").offsetTop;
 
       this.lineLength = Math.sqrt(Math.pow((this.point2X - this.point1X), 2) + Math.pow((this.point2Y - this.point1Y), 2));
-      this.lineLengthMeter = this.lineLength/(this.photoResolution/0.0254);
-      //this.goalDistance = (this.focalLength * (this.lineLengthMeter + this.poleDistance)) / this.lineLengthMeter;
+      k = this.lineLength/4032;
+      //this.lineLengthMeter = this.lineLength/(this.photoResolution/0.0254);
+      this.lineLengthMeter = k * 0.00393;
       this.goalDistance = (this.focalLength * (this.lineLengthMeter + this.poleDistance)) / this.lineLengthMeter;
+
+
+
+
       console.log(this.poleDistance);
 
 
@@ -102,8 +111,20 @@ export class MeasurementsComponent implements OnInit {
       this.instructionMessage = "Выберите вторую точку";
       //this.point1X = event.clientX;
       //this.point1Y = event.clientY;
-      this.point1X = event.offsetX?(event.offsetX):event.pageX-document.getElementById("canvasImg").offsetLeft;
-	    this.point1Y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("canvasImg").offsetTop;
+      this.point1X = event.offsetX?(event.offsetX):event.pageX-document.getElementById("canvasImgRight").offsetLeft;
+	    this.point1Y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("canvasImgRight").offsetTop;
+    }
+  }
+
+  private leftOpacityChange(): void {
+    if (this.leftImageOpacity >= 0 && this.leftImageOpacity < 101) {
+      document.getElementById("canvasImgLeft").style.opacity = String(this.leftImageOpacity/100);
+    }
+  }
+
+  private rightOpacityChange(): void {
+    if (this.rightImageOpacity >= 0 && this.rightImageOpacity < 101) {
+      document.getElementById("canvasImgRight").style.opacity = String(this.rightImageOpacity/100);
     }
   }
 
