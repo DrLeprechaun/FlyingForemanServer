@@ -6,11 +6,13 @@ import java.util.Arrays;
 import java.sql.Array;
 import java.util.stream.IntStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.hibernate.type.TimestampType;
 
+import com.lateco.lotteryserver.postgresql.IntegerArrayType;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 
 @Entity
@@ -20,11 +22,11 @@ public class RegularBets implements Serializable{
 	private Long regularBetsId;
 	private Long regularBetsLotteryIdFk;
 	private Long regularBetsUserIdFk;
-	private Array regularBetsCombination;
+	private List<Integer> regularBetsCombination;
 	private TimestampType regularBetsBetTimestamp;
 	private Boolean regularBetsWin;
 	
-	public RegularBets (Long regularBetsId, Long regularBetsLotteryIdFk, Long regularBetsUserIdFk, Array regularBetsCombination, TimestampType regularBetsBetTimestamp, Boolean regularBetsWin) {
+	public RegularBets (Long regularBetsId, Long regularBetsLotteryIdFk, Long regularBetsUserIdFk, List<Integer>regularBetsCombination, TimestampType regularBetsBetTimestamp, Boolean regularBetsWin) {
 		this.regularBetsId = regularBetsId;
 		this.regularBetsLotteryIdFk = regularBetsLotteryIdFk;
 		this.regularBetsUserIdFk = regularBetsUserIdFk;
@@ -36,20 +38,14 @@ public class RegularBets implements Serializable{
 	public RegularBets() {}
 	
 	public RegularBets(long userId, int[] combination) {
-		this.regularBetsLotteryIdFk = new Long(1);
+		this.regularBetsLotteryIdFk = new Long(userId);
 		this.regularBetsUserIdFk = new Long(1);
-		//this.regularBetsCombination = IntStream.of( combination ).boxed().toArray( Integer[]::new );
-		/*ArrayList<Integer> combinationInteger = new ArrayList<Integer>();
-		for (String str : combination) {
-			try {
-				combinationInteger.add(Integer.parseInt(str));
-			} catch (NumberFormatException nfe) {
-				nfe.printStackTrace();
-				combinationInteger.add(0);
-			}
-		}*/
-		//this.regularBetsCombination = Arrays.stream( combination ).boxed().toArray( IntArrayType::new );
+		this.regularBetsCombination = new ArrayList<Integer>();
+		for (int i: combination) {
+			this.regularBetsCombination.add(i);
+		}
 		this.regularBetsWin = false;
+		this.regularBetsBetTimestamp = null;
 	}
 
 	public Long getRegularBetsId() {
@@ -76,11 +72,11 @@ public class RegularBets implements Serializable{
 		this.regularBetsUserIdFk = regularBetsUserIdFk;
 	}
 
-	public Array getRegularBetsCombination() {
+	public List<Integer> getRegularBetsCombination() {
 		return regularBetsCombination;
 	}
 
-	public void setRegularBetsCombination(Array regularBetsCombination) {
+	public void setRegularBetsCombination(List<Integer>regularBetsCombination) {
 		this.regularBetsCombination = regularBetsCombination;
 	}
 

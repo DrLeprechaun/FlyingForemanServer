@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,22 +22,36 @@ import com.lateco.lotteryserver.persistence.HibernateUtil;
 public class RegularBetsController {
 	
 	@RequestMapping("/createRegularBet")
-    public BasicResponse createRegularBet(@RequestParam(value="userId") long userId, @RequestParam(value="combination") int[] combination) {
-		
-		RegularBets regularBet = new RegularBets(userId, combination);
-		//RegularBets regularBet = new RegularBets(userId, new ArrayList<>(Arrays.asList(combination.split(","))));
-		
+	public BasicResponse createRegularBet(@RequestParam(value="userId") long userId, @RequestParam(value="combination") int[] combination) {
 		try {
-    		Session session = HibernateUtil.getSessionFactory().openSession();
+			Session session = HibernateUtil.getSessionFactory().openSession();
     		session.beginTransaction();
-    	
-    		session.save(regularBet);
+    		
+    		RegularBets rb = new RegularBets(userId, combination);
+    		session.save(rb);
+    		
     		session.close();
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    			
-    		}
-			return new BasicResponse("SUCCESS", ""); 	
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return new BasicResponse("SUCCESS", "");
 	}
+    /*public BasicResponse createRegularBet(@RequestParam(value="userId") long userId, @RequestParam(value="combination") int[] combination) {
+		
+			List<RegularBets> list = new ArrayList<RegularBets>();
+			try {
+				Session session = HibernateUtil.getSessionFactory().openSession();
+	    		session.beginTransaction();
+	    		
+	    		Query query = session.createQuery("from RegularBets b");
+	    		list = query.list();
+	    		
+	    		session.close();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			return new BasicResponse("SUCCESS", list.get(0).getRegularBetsCombination().toString()); 	
+	}*/
+	
 
 }

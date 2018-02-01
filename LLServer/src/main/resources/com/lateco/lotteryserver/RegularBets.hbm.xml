@@ -10,7 +10,7 @@
         <property name="regularBetsUserIdFk" type="java.lang.Long">
             <column name="user_id_fk" />
         </property>
-        <property name="regularBetsCombination" type="java.sql.Array">
+        <property name="regularBetsCombination" type="com.lateco.lotteryserver.postgresql.ShortArrayType">
             <column name="combination" />
         </property>
         <property name="regularBetsBetTimestamp" type="org.hibernate.type.TimestampType">
