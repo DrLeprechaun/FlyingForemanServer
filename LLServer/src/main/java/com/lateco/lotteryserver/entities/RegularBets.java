@@ -14,6 +14,8 @@ import org.hibernate.type.TimestampType;
 
 import com.lateco.lotteryserver.postgresql.IntegerArrayType;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
+//import java.time.OffsetDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "regular_bets")
@@ -23,10 +25,10 @@ public class RegularBets implements Serializable{
 	private Long regularBetsLotteryIdFk;
 	private Long regularBetsUserIdFk;
 	private List<Integer> regularBetsCombination;
-	private TimestampType regularBetsBetTimestamp;
+	private Date regularBetsBetTimestamp;
 	private Boolean regularBetsWin;
 	
-	public RegularBets (Long regularBetsId, Long regularBetsLotteryIdFk, Long regularBetsUserIdFk, List<Integer>regularBetsCombination, TimestampType regularBetsBetTimestamp, Boolean regularBetsWin) {
+	public RegularBets (Long regularBetsId, Long regularBetsLotteryIdFk, Long regularBetsUserIdFk, List<Integer>regularBetsCombination, Date regularBetsBetTimestamp, Boolean regularBetsWin) {
 		this.regularBetsId = regularBetsId;
 		this.regularBetsLotteryIdFk = regularBetsLotteryIdFk;
 		this.regularBetsUserIdFk = regularBetsUserIdFk;
@@ -46,6 +48,17 @@ public class RegularBets implements Serializable{
 		}
 		this.regularBetsWin = false;
 		this.regularBetsBetTimestamp = null;
+	}
+	
+	public RegularBets(long userId, long lotteryId, int[] combination) {
+		this.regularBetsLotteryIdFk = new Long(lotteryId);
+		this.regularBetsUserIdFk = new Long(userId);
+		this.regularBetsCombination = new ArrayList<Integer>();
+		for (int i: combination) {
+			this.regularBetsCombination.add(i);
+		}
+		this.regularBetsWin = false;
+		this.regularBetsBetTimestamp = new Date();
 	}
 
 	public Long getRegularBetsId() {
@@ -80,11 +93,11 @@ public class RegularBets implements Serializable{
 		this.regularBetsCombination = regularBetsCombination;
 	}
 
-	public TimestampType getRegularBetsBetTimestamp() {
+	public Date getRegularBetsBetTimestamp() {
 		return regularBetsBetTimestamp;
 	}
 
-	public void setRegularBetsBetTimestamp(TimestampType regularBetsBetTimestamp) {
+	public void setRegularBetsBetTimestamp(Date regularBetsBetTimestamp) {
 		this.regularBetsBetTimestamp = regularBetsBetTimestamp;
 	}
 

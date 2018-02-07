@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import com.lateco.lotteryserver.persistence.HibernateUtil;
 public class PlayerController {
 	
 	@ExceptionHandler
+	@CrossOrigin
 	@RequestMapping("/getAmount")
     public PlayerAmount getAmount(@RequestParam(value="id") long id) {
 		

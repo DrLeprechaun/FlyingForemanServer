@@ -17,6 +17,7 @@
        <mapping resource="com/lateco/lotteryserver/Mytest.hbm.xml"></mapping>
        <mapping resource="com/lateco/lotteryserver/Players.hbm.xml"></mapping>
        <mapping resource="com/lateco/lotteryserver/RegularBets.hbm.xml"></mapping>
+       <mapping resource="com/lateco/lotteryserver/RegularLottery.hbm.xml"></mapping>
 
     </session-factory>
 </hibernate-configuration>
