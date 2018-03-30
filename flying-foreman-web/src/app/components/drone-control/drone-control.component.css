@@ -1,0 +1,78 @@
+.ffLogWindow {
+  margin-top: 100px;
+}
+
+.controlGroup {
+  display: inline-block;
+}
+
+#controlPanel {
+  margin-top: 20px;
+}
+
+#componentHeader {
+  margin-top: 20px;
+}
+
+#startButton {
+  cursor: pointer;
+  width: 225px;
+  margin-top: 5px;
+  height: 100px;
+}
+
+#stopButton {
+  cursor: pointer;
+  width: 225px;
+  margin-top: 5px;
+  height: 100px;
+}
+
+#upButton {
+  cursor: pointer;
+  height: 60px;
+  width: 110px;
+}
+
+#downButton {
+  cursor: pointer;
+  margin-top: 5px;
+  height: 60px;
+  width: 110px;
+}
+
+#leftButton {
+  cursor: pointer;
+  margin-left: 10px;
+  width: 105px;
+  height: 105px;
+}
+
+#forwardButton {
+  cursor: pointer;
+  width: 105px;
+  height: 105px;
+}
+
+#rightButton {
+  cursor: pointer;
+  width: 105px;
+  height: 105px;
+}
+
+#cameraWindow {
+  width: 460px;
+  height: 400px;
+  background-color: black;
+  margin-top: 20px;
+}
+
+#buttonText {
+  font-size: 2px;
+}
+
+.page-content {
+  margin-left: 30px;
+}
+
+* { font-family: Arial; }

@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">АКВР</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="main">Главная<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle active" href="private-office" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Личный кабинет
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="drone-control">Управление</a>
+          <a class="dropdown-item" href="drone-route">Маршрут</a>
+          <a class="dropdown-item" href="measurements">Измерения</a>
+        </div>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="report">Отчёт</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" (click)="logOut()">Выход</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<div class="page-content">
+<h3 id="componentHeader">Управление квадрокоптером</h3>
+<hr>
+<div id="cameraWindow">
+</div>
+<div id="controlPanel">
+  <table>
+    <tr>
+      <td>
+    <button id="upButton" type="button" (click)=executeCommand(2) class="btn btn-primary">&#x025B3;<br/>вверх</button><br/>
+    <!--<button id="upButton" type="button" ng-click="executeCommand('up')" class="btn-lg btn-primary">&#x025B3;</button><br/>-->
+    <button id="downButton" type="button" (click)=executeCommand(3) class="btn btn-primary">&#x025BD;<br/>вниз</button>
+  </td>
+  <td>
+    <button id="leftButton" type="button" (click)=executeCommand(4) class="btn-lg btn-primary"><img src="/assets/img/arrow-left.png"/><br/>вправо</button>
+    <button id="forwardButton" type="button" (click)=executeCommand(5) class="btn-lg btn-primary"><img src="/assets/img/arrow-up.png"/><br/>вперёд</button>
+    <button id="rightButton" type="button" (click)=executeCommand(6) class="btn-lg btn-primary"><img src="/assets/img/arrow-right.png"/><br/>влево</button>
+  </td>
+</tr>
+</table>
+  <div style="margin-top: 20px">
+    <button id="stopButton" type="button" (click)=executeCommand(0) class="btn-lg btn-success ">Стоп </button>
+    <button id="startButton" type="button" (click)=executeCommand(1) class="btn-lg btn-danger ">Старт</button>
+  </div>
+</div>
+<div class="ffLogWindow" ng-style="{ color: getLogColor() }">
+<p innerHTML="{{data.title}}"></p>
+<p innerHTML="{{data.content}}"></p>
+</div>
+</div>

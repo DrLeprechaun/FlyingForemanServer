@@ -1,0 +1,41 @@
+<hibernate-mapping>
+    <class name="com.gakeko.ffserver.entities.PhotoRegister" table="photo_register">
+        <id name="photoRegisterId" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="photoRegisterLeftName" type="java.lang.String">
+            <column name="left_name" />
+        </property>
+        <property name="photoRegisterRightName" type="java.lang.String">
+            <column name="right_name" />
+        </property>
+        <property name="photoRegisterLeftLocation" type="java.lang.String">
+            <column name="left_location" />
+        </property>
+        <property name="photoRegisterRightLocation" type="java.lang.String">
+            <column name="right_location" />
+        </property>
+        <property name="photoRegisterAzimuth" type="java.math.BigDecimal">
+            <column name="azimuth" />
+        </property>
+        <property name="photoRegisterXCoordinate" type="java.math.BigDecimal">
+            <column name="x_coordinate" />
+        </property>
+        <property name="photoRegisterYCoordinate" type="java.math.BigDecimal">
+            <column name="y_coordinate" />
+        </property>
+        <property name="photoRegisterLeftTs" type="java.util.Date">
+            <column name="left_ts" />
+        </property>
+        <property name="photoRegisterRightTs" type="java.util.Date">
+            <column name="right_ts" />
+        </property>
+        <property name="photoRegisterDistance" type="java.math.BigDecimal">
+            <column name="distance" />
+        </property>
+        <property name="photoRegisterUserId" type="java.lang.Long">
+            <column name="user_id" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -25,7 +25,7 @@ public class DronControlController {
 	@Autowired
     SocketService socketService;
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin
 	@RequestMapping(value = "/executeCommand")
     public ResponseModel echoTest(@RequestParam("cmd") int cmd) {
 		CommandDescriptor commandDescriptor = new CommandDescriptor(cmd);

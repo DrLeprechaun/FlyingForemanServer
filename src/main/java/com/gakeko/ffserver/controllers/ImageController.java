@@ -1,17 +1,29 @@
 package com.gakeko.ffserver.controllers;
 
 import java.io.IOException;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import com.gakeko.ffserver.persistence.HibernateUtil;
+
 import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.File;
 import java.io.FileInputStream;
+import com.gakeko.ffserver.entities.PhotoRegister;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,11 +61,72 @@ public class ImageController {
                 .body(new InputStreamResource(imgFile.getInputStream()));
     }
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/sid3", method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
     public void getImage3(HttpServletResponse response) throws IOException {
 
 		File file = new File("E:\\img\\IMG_3121.JPG");
+		FileInputStream fis = new FileInputStream(file);
+
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        StreamUtils.copy(fis, response.getOutputStream());
+    }
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/getLeftPhoto", method = RequestMethod.GET,
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public void getLeftPhoto(HttpServletResponse response, @RequestParam(value="id") long id) throws IOException {
+		
+		PhotoRegister photoRegister = new PhotoRegister();
+
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+    		Transaction tx = session.beginTransaction();
+    	
+    		photoRegister = (PhotoRegister) session.createCriteria(PhotoRegister.class)
+    				.add(Restrictions.eq("photoRegisterId", id))
+    				.uniqueResult();
+    		
+    		
+    		tx.commit();
+    		session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			AppErrorController.description = e.toString()+ ":" + e.getMessage();
+		}
+		
+		File file = new File(photoRegister.getPhotoRegisterLeftLocation());
+		FileInputStream fis = new FileInputStream(file);
+
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        StreamUtils.copy(fis, response.getOutputStream());
+    }
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/getRightPhoto", method = RequestMethod.GET,
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public void getRightPhoto(HttpServletResponse response, @RequestParam(value="id") long id) throws IOException {
+		
+		PhotoRegister photoRegister = new PhotoRegister();
+
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+    		Transaction tx = session.beginTransaction();
+    	
+    		photoRegister = (PhotoRegister) session.createCriteria(PhotoRegister.class)
+    				.add(Restrictions.eq("photoRegisterId", id))
+    				.uniqueResult();
+    		
+    		
+    		tx.commit();
+    		session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			AppErrorController.description = e.toString()+ ":" + e.getMessage();
+		}
+		
+		File file = new File(photoRegister.getPhotoRegisterRightLocation());
 		FileInputStream fis = new FileInputStream(file);
 
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);

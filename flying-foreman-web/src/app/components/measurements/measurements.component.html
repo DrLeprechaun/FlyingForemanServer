@@ -1,0 +1,138 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">АКВР</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="main">Главная<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle active" href="private-office" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Личный кабинет
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="drone-control">Управление</a>
+          <a class="dropdown-item" href="drone-route">Маршрут</a>
+          <a class="dropdown-item" href="measurements">Измерения</a>
+        </div>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="report">Отчёт</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" (click)="logOut()">Выход</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<div class="page-content">
+<h3 id="componentHeader">Измерения</h3>
+<hr>
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Выбрать фотографии</button>
+<hr>
+<div class="workbench">
+  <div id="canvas" class="canvas" (click)=canvasClick($event)>
+    <img id="canvasImgLeft" class="canvasImgLeft" src="http://localhost:8081/sid3">
+    <img id="canvasImgRight" class="canvasImgRight" src="http://localhost:8081/sid3">
+    <img id="markerLeft" class="markerLeft" src="/assets/img/cross.png">
+    <img id="markerRight" class="markerRight" src="/assets/img/cross.png">
+    <svg id="svg" height="3024" width="4032">
+      <line id="svgLine" x1="0" x2="100" y1="0" y2="100" style="stroke:rgb(255,0,0);stroke-width:2" />
+    </svg>
+  </div>
+  <table class="opacityTable">
+    <tr>
+      <td>
+        Прозрачность левой<br/>фотографии (%):
+      </td>
+      <td>
+        Прозрачность правой<br/>фотографии (%):
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="number" [(ngModel)]="leftImageOpacity" min="0" max="100" (change)=leftOpacityChange()>
+      </td>
+      <td>
+        <input type="number" [(ngModel)]="rightImageOpacity" min="0" max="100" (change)=rightOpacityChange()>
+      </td>
+    </tr>
+  </table>
+  <div class="tools">
+    <p><b>{{instructionMessage}}</b></p>
+    <table>
+      <tr>
+        <td>
+          Длина отрезка (пкс):
+          <input class="form-control" type="text"  [(ngModel)] = "lineLength" readonly>
+        </td>
+        <td style="padding-left: 40px;">
+          Расстояние между камерами (м):
+          <input id="poleDistanceInput" type="number" class="form-control" placeholder="0" [(ngModel)] = "poleDistance">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Длина отрезка (м):
+          <input class="form-control" type="text"  [(ngModel)] = "lineLengthMeter" readonly>
+        </td>
+        <td style="padding-left: 40px;">
+          Расстояние до дрона (м):
+          <input class="form-control" type="text"  [(ngModel)] = "goalDistance" readonly>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <p>Информация о фотографии:</p>
+    <table>
+      <tr>
+        <td>
+          Фокусное расстояние (м):
+          <input class="form-control" type="text" [(ngModel)] = "focalLength" readonly>
+        </td>
+        <td style="padding-left: 40px;">
+          Разрешение (пкс/дюйм):
+          <input class="form-control" type="text" [(ngModel)] = "photoResolution" readonly>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Дата съёмки:
+          <input class="form-control" type="text" [(ngModel)] = "photoDateTime" readonly>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <button type="button" class="btn btn-danger" id="writeResultsButton">Записать результаты</button>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table">
+      <tr>
+        <th>Left</th>
+        <th>Right</th>
+      </tr>
+      <tr *ngFor="let p of photoRegister">
+        <td>{{ p.photo_register_left_name }}</td>
+        <td>{{ p.photo_register_right_name }}</td>
+      <tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
