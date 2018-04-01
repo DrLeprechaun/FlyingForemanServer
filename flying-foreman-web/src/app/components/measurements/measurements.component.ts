@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as EXIF from 'exif-js';
-//import { FTP } from '@ionic-native/ftp';
-import { Http, Response, Headers } from '@angular/http';
+import { MeasurementsService } from '../../services/measurements.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -32,7 +31,7 @@ export class MeasurementsComponent implements OnInit {
   data: any = null;
 
   constructor(
-    private _http: Http,
+    private measurementsService: MeasurementsService,
     private modalService: NgbModal) {
       this.data = {title: "", content: ""}
   }
@@ -59,7 +58,7 @@ export class MeasurementsComponent implements OnInit {
     document.getElementById("markerRight").style.visibility = "hidden";
     document.getElementById("svg").style.visibility = "hidden";
 
-    this.selectPhoto();
+    this.loadPhotoRegister();
   }
 
   private canvasClick(event: MouseEvent): void {
@@ -103,7 +102,6 @@ export class MeasurementsComponent implements OnInit {
 
     //длина отрезка на фотографии в пикселях
     this.lineLength = Math.sqrt(Math.pow((this.point2X - this.point1X), 2) + Math.pow((this.point2Y - this.point1Y), 2));
-    //this.lineLength = Math.sqrt(Math.pow((this.point2X - this.point1X), 2));
     //размер отрезка относительно ширины фотографии
     lineScale = this.lineLength/imageWidth;
     //перевод в мм
@@ -154,33 +152,23 @@ private rightOpacityChange(): void {
   }
 }
 
-private selectPhoto() {
-  /*return this._http.get('http://178.63.57.162:8070/getPhotoRegister', {headers: this.getHeaders()})
-              .map((res: Response) => res.json())
-               .subscribe(data => {
-                      this.data = data;
-                      console.log(this.data);
-              });*/
-              this._http.get('http://178.63.57.162:8070/getPhotoRegister', {headers: this.getHeaders()}).toPromise()
-              .then((res) => {
-                if (res.json().status === 'SUCCESS') {
-                  this.photoRegister = res.json().photo_register_list;
-                  console.log(res.json());
-                }
-              },
-              (err) => {
-                console.log(err);
-              })
-            }
+private loadPhotoRegister() {
+  this.measurementsService.getPhotoRegister()
+  .then((res) => {
+      if (res.json().status === 'SUCCESS') {
+          this.photoRegister = res.json().photo_register_list;
+          console.log(res.json());
+        }
+      },
+      (err) => {
+          console.log(err);
+    })
+}
 
   private getHeaders() : Headers {
       const headers = new Headers();
       headers.append('Accept', 'application/json');
       return headers;
-  }
-
-  private selectPhotos(): void {
-    console.log("Select photos");
   }
 
   open(content) {

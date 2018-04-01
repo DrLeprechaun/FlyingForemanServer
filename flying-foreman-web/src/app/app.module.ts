@@ -12,6 +12,8 @@ import { DroneRouteComponent } from './components/drone-route/drone-route.compon
 import { MeasurementsComponent } from './components/measurements/measurements.component';
 import { ReportComponent } from './components/report/report.component';
 import { PrivateOfficeComponent } from './components/private-office/private-office.component';
+import { BasicService } from './services/basic.service';
+import { MeasurementsService } from './services/measurements.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,10 @@ import { PrivateOfficeComponent } from './components/private-office/private-offi
       }
     ])
   ],
-  providers: [],
+  providers: [
+    BasicService,
+    MeasurementsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
