@@ -17,7 +17,8 @@ import com.gakeko.ffserver.persistence.HibernateUtil;
 public class PhotoRegisterController {
 	
 	@ExceptionHandler
-	@CrossOrigin
+	//@CrossOrigin
+	@CrossOrigin(origins = "*")
 	@RequestMapping("/getPhotoRegister")
 	public PhotoRegisterResponse getPhotoRegister(/*@RequestParam(value="userId") long id*/) {
 		

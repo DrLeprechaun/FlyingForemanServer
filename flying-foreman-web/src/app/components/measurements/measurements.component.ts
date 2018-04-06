@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as EXIF from 'exif-js';
 import { MeasurementsService } from '../../services/measurements.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { BasicService } from '../../services/basic.service';
+import {NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-measurements',
@@ -10,6 +11,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class MeasurementsComponent implements OnInit {
 
+  modalReference: NgbModalRef;
   private  lineLength: number;
   private clientX: number;
   private clientY: number;
@@ -28,15 +30,23 @@ export class MeasurementsComponent implements OnInit {
   private leftImageOpacity: number;
   private rightImageOpacity: number;
   private photoRegister: any[] = [];
+  private xCoordinate: number = 0;
+  private yCoordinate: number = 0;
   data: any = null;
+  leftPhoto: any;
+  rightPhoto: any;
+
 
   constructor(
+    private basicService: BasicService,
     private measurementsService: MeasurementsService,
     private modalService: NgbModal) {
       this.data = {title: "", content: ""}
   }
 
   ngOnInit() {
+    this.leftPhoto = this.measurementsService.getLeftPhotoUrl(1);
+    this.rightPhoto = this.measurementsService.getRightPhotoUrl(1);
     this.lineLength = 0;
     this.clientX = 0;
     this.clientY = 0;
@@ -45,7 +55,7 @@ export class MeasurementsComponent implements OnInit {
     this.point2X = 0;
     this.point2Y = 0;
     this.clickFlag = false;
-    this.instructionMessage = "Выберите первую точку";
+    this.instructionMessage = "Выберите фотографии";
     this.poleDistance = 1;
     this.lineLengthMeter = 0;
     this.focalLength = 0;
@@ -62,6 +72,7 @@ export class MeasurementsComponent implements OnInit {
   }
 
   private canvasClick(event: MouseEvent): void {
+    console.log("canvasClick");
   //var canvas = document.getElementById("canvas");
   //this.clientX = event.clientX;
   //this.clientY = event.clientY;
@@ -86,6 +97,7 @@ export class MeasurementsComponent implements OnInit {
     resolution_exif = allMetaData.XResolution.numerator / allMetaData.XResolution.denominator;
     imageWidth = allMetaData.PixelXDimension;
     console.log(allMetaData.PixelXDimension);
+    console.log("allMetaData");
     console.log(allMetaData);
   });
 
@@ -172,7 +184,8 @@ private loadPhotoRegister() {
   }
 
   open(content) {
-    this.modalService.open(content).result.then((result) => {
+    this.modalReference = this.modalService.open(content);
+    this.modalReference.result.then((result) => {
       //this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -187,6 +200,22 @@ private loadPhotoRegister() {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  selectPhotoPair(id: number): void {
+    this.leftPhoto = this.measurementsService.getLeftPhotoUrl(id);
+    this.rightPhoto = this.measurementsService.getRightPhotoUrl(id);
+    this.instructionMessage = "Выберите первую точку";
+
+    for (var i = 0; i < this.photoRegister.length; i++) {
+      if (this.photoRegister[i].photo_register_id == id) {
+        this.xCoordinate = this.photoRegister[i].photo_register_xcoordinate;
+        this.yCoordinate = this.photoRegister[i].photo_register_ycoordinate;
+        break;
+      }
+    }
+
+    this.modalReference.close();
   }
 
 }

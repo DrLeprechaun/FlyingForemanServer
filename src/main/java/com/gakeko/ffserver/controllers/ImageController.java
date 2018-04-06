@@ -73,7 +73,8 @@ public class ImageController {
         StreamUtils.copy(fis, response.getOutputStream());
     }
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/getLeftPhoto", method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
     public void getLeftPhoto(HttpServletResponse response, @RequestParam(value="id") long id) throws IOException {
@@ -103,7 +104,8 @@ public class ImageController {
         StreamUtils.copy(fis, response.getOutputStream());
     }
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/getRightPhoto", method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
     public void getRightPhoto(HttpServletResponse response, @RequestParam(value="id") long id) throws IOException {
