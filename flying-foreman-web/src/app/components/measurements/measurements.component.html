@@ -1,28 +1,68 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <img src="assets/img/akvr_logo.png">
-    <a class="navbar-brand" href="#" style="margin-left: 20px;">АКВР</a>
+    <a href="main"><img src="assets/img/akvr_logo.png"></a>
+    <a class="navbar-brand" href="main" style="margin-left: 20px;">АКВР</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="main">Главная<span class="sr-only">(current)</span></a>
-        </li>
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle active" href="private-office" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="private-office" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
           Личный кабинет
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="drone-control">Управление</a>
-          <a class="dropdown-item" href="drone-route">Маршрут</a>
+          <a class="dropdown-item" href="settings">Настройки</a>
+          <a class="dropdown-item" href="drone-registration">Регистрация квадрокоптеров</a>
+          <a class="dropdown-item" href="zone-management">Управление полётными зонами</a>
+          <a class="dropdown-item" href="drone-route">Управление маршрутами</a>
+          <a class="dropdown-item" href="drone-control">Управление квадрокоптером</a>
           <a class="dropdown-item" href="measurements">Измерения</a>
+          <a class="dropdown-item" href="report">Управление отчётностью</a>
+          <a class="dropdown-item" href="report-archive">Архив отчётов</a>
+          <a class="dropdown-item" href="guide">Руководство пользователя</a>
         </div>
       </li>
-        <li class="nav-item">
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="private-office" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+        Методология
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="using-examples">Примеры использования АКВР</a>
+        <a class="dropdown-item" href="report-examples">Примеры отчётов АКВР</a>
+        <a class="dropdown-item" href="pmi">Методика управления (PMI)</a>
+        <a class="dropdown-item" href="bim">BIM модель</a>
+        <a class="dropdown-item" href="standards">Квалификационные стандарты</a>
+        <a class="dropdown-item" href="trainings">Тренинги</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="private-office" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+      Покупка и сервис
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="buy-akvr">Покупка сервиса АКВР</a>
+      <a class="dropdown-item" href="support">Техническая поддержка</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="private-office" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+    Сотрудничество
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    <a class="dropdown-item" href="affiliate-program">Партнерская программа</a>
+    <a class="dropdown-item" href="communities-cooperation">Сотрудничество с профессиональными сообществами</a>
+    <a class="dropdown-item" href="universities-cooperation">Сотрудничество с ВУЗами</a>
+    <a class="dropdown-item" href="trainings">Тренинги</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="contacts" style="color: white;">Контакты</a>
+</li>
+        <!--<li class="nav-item">
           <a class="nav-link" href="report">Отчёт</a>
-        </li>
+          <a class="nav-link active" href="report">Отчёт</a>
+        </li>-->
       </ul>
       <ul class="navbar-nav navbar-right">
         <li class="nav-item">
