@@ -6,22 +6,38 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle active" href="private-office" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Личный кабинет
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="drone-control">Управление</a>
-          <a class="dropdown-item" href="drone-route">Маршрут</a>
-          <a class="dropdown-item" href="measurements">Измерения</a>
-          <a class="dropdown-item" href="report">Отчёты</a>
-        </div>
-      </li>
+      <ul class="navbar-nav mr-auto" style="text-align: center;">
+        <li class="nav-item">
+          <a class="nav-link active" href="settings">Общие<br>Настройки</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="drone-registration">Регистрация<br>квадрокоптеров</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="zone-management">Управление<br>зонами</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="drone-route">Управление<br>маршрутами</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="drone-control">Управление<br>квадрокоптерами</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="measurements" style="margin-top: 10%;">Измерения</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="report">Управление<br>отчётностью</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="report-archive">Архив<br>отчётов</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="guide">Руководство<br>пользователя</a>
+        </li>
       </ul>
       <ul class="navbar-nav navbar-right">
         <li class="nav-item">
-          <a class="nav-link" (click)="logOut()">Выход</a>
+          <a class="nav-link active" href="main">Выход</a>
         </li>
       </ul>
     </div>

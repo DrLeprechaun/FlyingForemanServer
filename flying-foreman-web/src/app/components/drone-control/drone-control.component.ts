@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+/*import { NavController } from 'ionic-angular';*/
+import { nipplejs } from 'nipplejs'
 
 @Component({
   selector: 'app-drone-control',
@@ -10,12 +11,19 @@ import 'rxjs/add/operator/map';
 })
 export class DroneControlComponent implements OnInit {
 
-  data: any = null;
+data: any = null;
 logColor: String = "green";
+options: any = null;
+manager: any = null;
+
 
 constructor(
   private _http: Http) {
     this.data = {title: "", content: ""}
+}
+
+ngOnInit(): void {
+  this.joyStick();
 }
 
 private executeCommand(cmd) {
@@ -38,8 +46,14 @@ private getLogColor() : String {
   return this.logColor;
 }
 
-ngOnInit(): void {
+private joyStick() {
+  let container = document.getElementById("joystick1");
+  let canvas = document.createElement('canvas');
 
+  canvas.width = 100;
+	canvas.height = 100;
+	container.appendChild(canvas);
+	let context=canvas.getContext('2d');
 }
 
 }
