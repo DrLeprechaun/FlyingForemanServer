@@ -1,0 +1,237 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a href="main"><img src="assets/img/akvr_logo.png"></a>
+    <a class="navbar-brand" href="main" style="margin-left: 20px;">АКВР</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto" style="text-align: center;">
+        <li class="nav-item">
+          <a class="nav-link active" href="settings">Общие<br>Настройки</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="drone-registration">Регистрация<br>квадрокоптеров</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="zone-management">Управление<br>зонами</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="drone-route">Управление<br>маршрутами</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="drone-control">Управление<br>квадрокоптерами</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="measurements" style="margin-top: 10px;">Измерения</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="report">Управление<br>отчётностью</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="report-archive">Архив<br>отчётов</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="guide">Руководство<br>пользователя</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link active" href="main">Выход</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<div class="page-content">
+<h3 id="componentHeader">Измерения</h3>
+<hr>
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Выбрать фотографии</button>
+<hr>
+
+
+<div class="workbench">
+
+<p><b>{{instructionMessage}}</b></p>
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Фотографии
+        </button>
+      </h5>
+    </div>
+
+    <!-- TO SHOW BY DEFAULT -->
+    <!--<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">-->
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+
+  <div id="canvas" class="canvas" (click)=canvasClick($event)>
+    <!--<img id="canvasImgLeft" class="canvasImgLeft" src="{{ leftPhotoURL }}">
+    <img id="canvasImgRight" class="canvasImgRight" src="{{ rightPhotoURL }}">-->
+    <img id="canvasImgLeft" class="canvasImgLeft" [src]="leftPhoto | async">
+    <img id="canvasImgRight" class="canvasImgRight" [src]="rightPhoto | async">
+
+    <img id="markerLeft" class="markerLeft" src="/assets/img/cross.png">
+    <img id="markerRight" class="markerRight" src="/assets/img/cross.png">
+    <svg id="svg" height="3024" width="4032">
+      <line id="svgLine" x1="0" x2="100" y1="0" y2="100" style="stroke:rgb(255,0,0);stroke-width:2" />
+    </svg>
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+  <hr>
+
+<!--<div id="accordion">
+  <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Вычисления
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">-->
+
+        <div id="accordion2">
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  Измерения
+                </button>
+              </h5>
+            </div>
+
+            <!-- TO SHOW BY DEFAULT -->
+            <!--<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">-->
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion2">
+              <div class="card-body">
+
+  <table class="opacityTable">
+    <tr>
+      <td>
+        Прозрачность левой<br/>фотографии (%):
+      </td>
+      <td style="padding-left: 40px;">
+        Прозрачность правой<br/>фотографии (%):
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input class="form-control" type="number" [(ngModel)]="leftImageOpacity" min="0" max="100" (change)=leftOpacityChange()>
+      </td>
+      <td style="padding-left: 40px;">
+        <input class="form-control" type="number" [(ngModel)]="rightImageOpacity" min="0" max="100" (change)=rightOpacityChange()>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <div class="tools">
+    <h5>Вычисленные данные:</h5>
+    <table>
+      <tr>
+        <td>
+          Длина отрезка (пкс):
+          <input class="form-control" type="text"  [(ngModel)] = "lineLength" readonly>
+        </td>
+        <td style="padding-left: 40px;">
+          Расстояние между камерами (м):
+          <input id="poleDistanceInput" type="number" class="form-control" placeholder="0" [(ngModel)] = "poleDistance">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Длина отрезка (м):
+          <input class="form-control" type="text"  [(ngModel)] = "lineLengthMeter" readonly>
+        </td>
+        <td style="padding-left: 40px;">
+          Расстояние до дрона (м):
+          <input class="form-control" type="text"  [(ngModel)] = "goalDistance" readonly>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <h5>Данные съёмки:</h5>
+    <table>
+      <tr>
+        <td>
+          Координата X:
+          <input class="form-control" type="text" [(ngModel)] = "xCoordinate">
+        </td>
+        <td style="padding-left: 40px;">
+          Координата Y:
+          <input class="form-control" type="text" [(ngModel)] = "yCoordinate">
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <h5>Информация о фотографии:</h5>
+    <table>
+      <tr>
+        <td>
+          Фокусное расстояние (м):
+          <input class="form-control" type="text" [(ngModel)] = "focalLength" readonly>
+        </td>
+        <td style="padding-left: 40px;">
+          Разрешение (пкс/дюйм):
+          <input class="form-control" type="text" [(ngModel)] = "photoResolution" readonly>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Дата съёмки:
+          <input class="form-control" type="text" [(ngModel)] = "photoDateTime" readonly>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <button type="button" class="btn btn-danger btn-lg" id="writeResultsButton">Записать результаты</button>
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+
+<!--Modal window-->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Выбор фотографий</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table">
+      <tr>
+        <th>Левая</th>
+        <th>Правая</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let p of photoRegister">
+        <td>{{ p.photo_register_left_name }}</td>
+        <td>{{ p.photo_register_right_name }}</td>
+        <td><button type="button" class="btn btn-primary" (click)="selectPhotoPair(p.photo_register_id)">Выбрать</button></td>
+      <tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Закрыть</button>
+  </div>
+</ng-template>

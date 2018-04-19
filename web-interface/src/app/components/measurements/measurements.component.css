@@ -1,0 +1,98 @@
+.page-content {
+  margin-left: 30px;
+}
+
+#componentHeader {
+  margin-top: 20px;
+}
+
+* { font-family: Arial; }
+
+#writeResultsButton {
+  margin-bottom: 40px;
+}
+
+.canvas {
+  width: 1000px;
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  cursor: crosshair;
+  position: relative;
+  top: 0;
+}
+
+.tools {
+  /*display: inline-block;*/
+  margin-top: 20px;
+}
+
+.workbench {
+  padding-top: 10px;
+}
+
+.workbench input {
+  width: 200px;
+}
+
+#canvasImg {
+  opacity: 0.5;
+}
+
+.parent {
+  position: relative;
+  top: 0;
+}
+.canvasImgLeft {
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+
+.canvasImgRight {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0.5;
+}
+
+.markerLeft {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  visibility: "hidden";
+}
+
+.markerRight {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  visibility: "hidden";
+}
+
+#svg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.opacityTable {
+  margin-top: 20px;
+}
+
+.buttonPanel {
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+#selectPhotoButton {
+  cursor: pointer;
+  font-family: Arial;
+}
+
+#writeResultsButton {
+  margin-top: 10px;
+  cursor: pointer;
+  font-family: Arial;
+}
