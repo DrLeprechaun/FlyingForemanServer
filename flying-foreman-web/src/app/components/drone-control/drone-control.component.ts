@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule, HostListener } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 /*import { NavController } from 'ionic-angular';*/
@@ -13,8 +13,13 @@ export class DroneControlComponent implements OnInit {
 
 data: any = null;
 logColor: String = "green";
-options: any = null;
-manager: any = null;
+joystick1Pressed: boolean = false;
+joystick1X:number = 0;
+joystick1Y:number = 0;
+cx1:number = 50;
+cy1:number = 50;
+j1x:number = 0;
+j1y:number = 0;
 
 
 constructor(
@@ -23,7 +28,15 @@ constructor(
 }
 
 ngOnInit(): void {
-  this.joyStick();
+  /*this.joyStick();*/
+  document.getElementById("joyStick1Button").addEventListener('mousedown', this.joystick1OnTouchStart.bind(this));
+  document.getElementById("joyStick1Button").addEventListener('mouseup', this.joystick1OnTouchStop.bind(this));
+  document.body.addEventListener('mouseup', this.bodyMouseDown.bind(this));
+  document.addEventListener('keydown', this.onKeydown.bind(this));
+  document.addEventListener('keyup', this.onKeyup.bind(this));
+  document.getElementById("joyStick1Button").addEventListener('mousemove', this.joystick1Drag.bind(this));
+  this.joystick1X = document.getElementById("joystick1").clientWidth / 2;
+  this.joystick1Y = document.getElementById("joystick1").clientHeight / 2;
 }
 
 private executeCommand(cmd) {
@@ -46,14 +59,88 @@ private getLogColor() : String {
   return this.logColor;
 }
 
-private joyStick() {
-  let container = document.getElementById("joystick1");
-  let canvas = document.createElement('canvas');
-
-  canvas.width = 100;
-	canvas.height = 100;
-	container.appendChild(canvas);
-	let context=canvas.getContext('2d');
+private bodyMouseDown(): void {
+  if (this.joystick1Pressed) {
+    this.joystick1Pressed = false;
+    this.cx1 = 50;
+    this.cy1 = 50;
+  }
 }
+
+private joystick1OnTouchStart(event): void {
+  this.joystick1Pressed = true;
+  this.j1x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("joystick1").offsetLeft;
+  this.j1y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("joystick1").offsetTop;
+}
+
+private joystick1OnTouchStop(event): void {
+  this.joystick1Pressed = false;
+  this.cx1 = 50;
+  this.cy1 = 50;
+}
+
+private joystick1Drag(event): void {
+  event.preventDefault();
+  if (this.joystick1Pressed) {
+
+    let x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("joystick1").offsetLeft;
+    let y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("joystick1").offsetTop;
+
+    if (((this.j1x - x) > 0 && this.cx1 > 24) || ((this.j1x - x) < 0 && this.cx1 < 75)) {
+      this.cx1 -= 0.5 * (this.j1x - x);
+    }
+
+    //if (((this.j1y - y) < 0 /*&& this.cy1 < 50*/) || ((this.j1y - y) > 0 /*&& this.cy1 < 40)*/) {
+    if (((this.j1y - y) > 0 && this.cy1 > 22) || ((this.j1y - y) < 0 && this.cy1 < 70)) {
+      this.cy1 -= 0.5 * (this.j1y - y);
+    }
+
+    console.log(y);
+    console.log(this.j1y - y);
+
+    this.j1x = x;
+    this.j1y = y;
+  }
+}
+
+private onKeydown(event): void {
+    console.log("onKeydown");
+    console.log(event.key);
+    if (event.key == "ArrowUp") {
+      this.cy1 = 25;
+    }
+    if (event.key == "ArrowDown") {
+      this.cy1 = 75;
+    }
+    if (event.key == "ArrowRight") {
+      this.cx1 = 75;
+    }
+    if (event.key == "ArrowLeft") {
+      this.cx1 = 25;
+    }
+}
+
+private onKeyup(event): void {
+    console.log("onKeyup");
+    console.log(event.key);
+    if (event.key == "ArrowUp") {
+      this.cy1 = 50;
+    }
+    if (event.key == "ArrowDown") {
+      this.cy1 = 50;
+    }
+    if (event.key == "ArrowRight") {
+      this.cx1 = 50;
+    }
+    if (event.key == "ArrowLeft") {
+      this.cx1 = 50;
+    }
+}
+
+/*@HostListener('document:keypress', ['$event'])
+handleKeyboardEvent(event: KeyboardEvent) {
+  event.preventDefault();
+    console.log(event.key);
+  }*/
 
 }
